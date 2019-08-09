@@ -1,9 +1,11 @@
  <h1>Cocktails</h1>
 <h2><%= @cocktail.name %></h2>
+<div class="card">
 <h3>Ingredients</h3>
-
+<%= cl_image_tag @cocktail.photo, height: 300, width: 400, crop: :fill %>
+</div>
   <h3>Description</h3>
-  <ul>
+  <div>
     <% @cocktail.doses.each do |dose| %>
       <li>
         <%= dose.ingredient.name %> |
@@ -12,10 +14,16 @@
         method: :delete, data:{confirm: "are you sure?"} %>
       </li>
     <% end %>
-  </ul>
+  </div>
+  <%= link_to new_cocktail_dose_path(@cocktail),
+   {class: "btn btn-info"} do %>
+    <span>Add new dose</span>
+   <% end %>
+|
+  <%= link_to root_path,
+  {class: "btn btn-info"} do %>
+   <span>Back to cocktails</span>
+   <% end %>
+|
 
-<%= link_to 'Add a dose', new_cocktail_dose_path(@cocktail) %>
-|
-<%= link_to 'Back to cocktails', root_path %>
-|
 
